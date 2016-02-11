@@ -1,0 +1,68 @@
+Divi Protocol 
+==============================================
+
+Task Server commands
+
+Client Functions:
+- Enqueue
+- Delete
+- Poll
+- Get
+- Quit
+Worker Functions:
+- Stake 
+- Claim
+- Checkpoint
+- Quit
+
+
+Protocol
+
+Request: Enqueue namedq priority payload-data
+Response: OK id-bytes
+	  ERR error-code error-string
+
+Request:
+*4\r\n
++ENQ\r\n
++qname\r\n
+:1\r\n
+$256\r\npayload-bytes....\r\n
+
+
+Response:
+*2\r\n
++OK\r\n
+$160\r\nid-bytes\r\n
+
+*3\r\n
+-ERR error-code error-message\r\n
+
+
+Request: Stake namedq worker-id
+*3\r\n
++STAKE\r\n
++qname\r\n
+$160\r\nid-bytes\r\n
+
+
+Response:  OK Id priority [ checkpoint1 ] [Id Start End]
+The first array should be intereprted as task info and the second one as claim info
+The task info will contain a checkpoint array - with only one element (the latest checkpoint) currently
+
+*4\r\n
++OK\r\n
+$160\r\nid-bytes\r\n
+:1\r\n
+*1\r\n
+$256\r\n
+checkpoint-bytes\r\n
+*3\r\n
+$160\r\nclaim-id-bytes\r\n
+:123456789\r\n
+:23456789\r\n
+
+
+
+
+

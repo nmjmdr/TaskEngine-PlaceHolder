@@ -1,0 +1,11 @@
+Benchmark testing
+
+What do we need to test?
+1. Test enqueing of tasks and stake claim of tasks in parallel
+2. Test 1 + Test claim renewal 
+3. Test 1 + Test task stake and marking as complete
+
+Benchmark test:
+
+Enqueue 20 tasks in parallel by two go routines, with different priorities
+Claim by 4 go routine workers in parallel, marking the tasks as complete as soon they receive them
